@@ -8,8 +8,11 @@ Every function gets an iterable that represents a trace.
 # TODO use izip with generators
 # from itertools import izip
 
-def ap (sym, trace):
-    return [sym in ap for ap in trace]
+def ap (sym, trace, truth_f=None):
+    if truth_f is None:
+        truth_f = lambda ap: sym in ap
+
+    return [truth_f(ap) for ap in trace]
 
 def nnot (fi):
     return [not el for el in fi]
